@@ -16,7 +16,6 @@ require 'pathname'
 # 8: route view to erb: #{file}
 
 get "/" do
-
   files = Dir.glob("data/*")
 
   @filenames = files.map { |f| File.basename(f, ".") }.sort {|a, b| a.downcase <=> b.downcase }
@@ -24,16 +23,21 @@ get "/" do
   erb :home
 end
 
-# get "/", :order => 'reverse' do
+get "/:order" do |ascend|
+  files = Dir.glob("data/*")
 
-#   files = Dir.glob("data/*")
+  @filenames = files.map { |f| File.basename(f, ".") }.sort {|a, b| a.downcase <=> b.downcase }
 
-#   @filenames = files.map { |f| File.basename(f, ".") }.sort {|a, b| a.downcase <=> b.downcase }
-
-#   @filenames.reverse
-
-#   erb :home
-# end
+  if ascend == true
+    @ascending = true
+    @ordering = "descending"
+  else
+    @filenames.reverse
+    @ascending = false
+    @ordering = "ascending"
+  end
+  erb :home
+end
 
 get "/show/:file" do |f|
   @file = File.read("data/#{f}")
