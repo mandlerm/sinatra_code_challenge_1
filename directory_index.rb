@@ -2,7 +2,6 @@ require "sinatra"
 require "sinatra/reloader"
 require "tilt/erubis"
 
-
 # [x] Pre: add files to data directory
 
 # 1. create '/' path
@@ -15,8 +14,8 @@ require "tilt/erubis"
 # 7. create temlate to display file
 # 8: route view to erb: #{file}
 
-
-
 get "/" do
+  @file_names = Dir.glob("data/*")
+  erb :file_display
 
 end
