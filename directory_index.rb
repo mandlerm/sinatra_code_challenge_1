@@ -23,19 +23,13 @@ get "/" do
   erb :home
 end
 
-get "/:order" do |ascend|
+get "/reverse" do
   files = Dir.glob("data/*")
 
   @filenames = files.map { |f| File.basename(f, ".") }.sort {|a, b| a.downcase <=> b.downcase }
 
-  if ascend == true
-    @ascending = true
-    @ordering = "descending"
-  else
-    @filenames.reverse
-    @ascending = false
-    @ordering = "ascending"
-  end
+  @filenames.reverse!
+  @reverse = true
   erb :home
 end
 

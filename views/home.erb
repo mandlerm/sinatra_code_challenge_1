@@ -12,10 +12,10 @@
     <% end %>
   </ul>
 
-  <% if @ascending == false %>
-    <a href="/true" >Display <%= "#{@ordering}" %> </a>
+  <% if @reverse %>
+    <a href="/" >Display Ascending </a>
   <% else %>
-    <a href="/false" > Display <%= "#{@ordering}" || decending %> </a>
+    <a href="/reverse" > Display Descending</a>
   <% end %>
 </body>
 </html>
